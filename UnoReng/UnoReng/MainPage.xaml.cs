@@ -12,7 +12,6 @@ public sealed partial class MainPage : Page
         this.InitializeComponent();
 
 //#if WINDOWS10_0_17763_0_OR_GREATER
-//        ElevatedView1.Background = new SolidColorBrush();
 //        ElevatedView2.Background = new SolidColorBrush();
 //#endif
 

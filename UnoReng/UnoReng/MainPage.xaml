@@ -16,20 +16,13 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d skia notwin android">
     <Grid>
-        <!--<toolkit:ElevatedView
-            x:Name="ElevatedView1"
-            Grid.RowSpan="3"
-            Margin="0,-100,200,300"
-            Background="Transparent"
-            Elevation="400"
-            ShadowColor="Purple" />-->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <ListView
-                MaxWidth="80"
+                MaxWidth="85"
                 ItemsSource="{Binding TopColors, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                 SelectedItem="{Binding SelectedColor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                 <ListView.ItemTemplate>
@@ -86,7 +79,7 @@
                         Grid.Row="2"
                         MaxWidth="800"
                         MaxHeight="600"
-                        Margin="0,20"
+                        Margin="0,15"
                         VerticalAlignment="Center"
                         CornerRadius="10">
                         <Image
@@ -102,9 +95,9 @@
                         VerticalAlignment="Top">
                         <toolkit:ElevatedView
                             x:Name="ElevatedView2"
-                            MaxWidth="150"
-                            MaxHeight="150"
-                            Margin="-40,-180,90,220"
+                            MaxWidth="100"
+                            MaxHeight="100"
+                            Margin="-40,-185,95,240"
                             Background="Transparent"
                             Elevation="250"
                             Opacity="1"
@@ -113,7 +106,7 @@
                             <Rectangle
                                 Width="100"
                                 Height="100"
-                                Margin="0,0,0,20"
+                                Margin="0,0,0,60"
                                 Fill="{Binding SelectedColor.HEX, FallbackValue=#491249}"
                                 RadiusX="10"
                                 RadiusY="10" />
