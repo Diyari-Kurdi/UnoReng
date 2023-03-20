@@ -1,0 +1,195 @@
+﻿<Page
+    x:Class="UnoReng.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:android="http://uno.ui/android"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:UnoReng"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:notwin="http://uno.ui/not_win"
+    xmlns:skia="http://uno.ui/skia"
+    xmlns:toolkit="using:Uno.UI.Toolkit"
+    xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    MinWidth="300"
+    MinHeight="300"
+    d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d skia notwin android">
+    <Grid>
+        <!--<toolkit:ElevatedView
+            x:Name="ElevatedView1"
+            Grid.RowSpan="3"
+            Margin="0,-100,200,300"
+            Background="Transparent"
+            Elevation="400"
+            ShadowColor="Purple" />-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ListView
+                MaxWidth="80"
+                ItemsSource="{Binding TopColors, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                SelectedItem="{Binding SelectedColor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:ColorModel">
+                        <Rectangle
+                            Width="25"
+                            Height="25"
+                            Margin="0,0"
+                            Fill="{Binding HEX}"
+                            RadiusX="5"
+                            RadiusY="5" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ScrollViewer Grid.Column="1">
+
+                <Grid
+                    Grid.Column="1"
+                    MinWidth="300"
+                    Padding="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Button
+                        x:Name="ChooseButton"
+                        Margin="0,10"
+                        Padding="20,10"
+                        HorizontalAlignment="Center"
+                        Command="{Binding OpenImageCommand}"
+                        CommandParameter="{Binding ElementName=ImageControl}"
+                        Content="Open an image" />
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox
+                            Margin="0,0,10,0"
+                            Padding="10,10"
+                            PlaceholderText="http://"
+                            SelectionHighlightColor="#491249"
+                            Text="{Binding ImageURL, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        <Button
+                            Grid.Column="1"
+                            Padding="10,10"
+                            Command="{Binding GoCommand}"
+                            CommandParameter="{Binding ElementName=ImageControl}"
+                            Content="GO" />
+                    </Grid>
+                    <StackPanel
+                        Grid.Row="2"
+                        MaxWidth="800"
+                        MaxHeight="600"
+                        Margin="0,20"
+                        VerticalAlignment="Center"
+                        CornerRadius="10">
+                        <Image
+                            x:Name="ImageControl"
+                            MaxWidth="800"
+                            MaxHeight="600"
+                            Source="{Binding ImageSource, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            Stretch="Uniform" />
+                    </StackPanel>
+                    <Grid
+                        Grid.Row="3"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top">
+                        <toolkit:ElevatedView
+                            x:Name="ElevatedView2"
+                            MaxWidth="150"
+                            MaxHeight="150"
+                            Margin="-40,-180,90,220"
+                            Background="Transparent"
+                            Elevation="250"
+                            Opacity="1"
+                            ShadowColor="{Binding SelectedColor.HEX, FallbackValue=#79748D}" />
+                        <StackPanel Padding="10,0" VerticalAlignment="Center">
+                            <Rectangle
+                                Width="100"
+                                Height="100"
+                                Margin="0,0,0,20"
+                                Fill="{Binding SelectedColor.HEX, FallbackValue=#491249}"
+                                RadiusX="10"
+                                RadiusY="10" />
+                            <TextBox
+                                Grid.Column="1"
+                                Margin="0,0,0,15"
+                                VerticalAlignment="Center"
+                                IsReadOnly="True"
+                                Text="{Binding SelectedColor.HEX}" />
+                            <TextBox
+                                Grid.Column="1"
+                                Margin="0,0,0,20"
+                                VerticalAlignment="Center"
+                                IsReadOnly="True"
+                                Text="{Binding SelectedColor.RGB}" />
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Button
+                                    x:Name="HtmlButton"
+                                    Width="100"
+                                    Margin="0,0,5,0"
+                                    Command="{Binding CopyHexToClipboardCommand}"
+                                    Content="Copy HEX">
+                                    <Button.Flyout>
+                                        <Flyout Placement="Bottom">
+                                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                                <TextBlock
+                                                    Margin="0,0,10,0"
+                                                    HorizontalAlignment="Center"
+                                                    Style="{ThemeResource BaseTextBlockStyle}"
+                                                    Text="Check Clipboard" />
+                                                <win:TextBlock
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="14"
+                                                    FontWeight="Medium"
+                                                    Foreground="Silver"
+                                                    Text="Win+V" />
+                                            </StackPanel>
+                                        </Flyout>
+                                    </Button.Flyout>
+
+                                </Button>
+
+                                <Button
+                                    Width="100"
+                                    Margin="5,0,0,0"
+                                    Command="{Binding CopyRgbToClipboardCommand}"
+                                    Content="Copy RGB">
+                                    <Button.Flyout>
+                                        <Flyout Placement="Bottom">
+                                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                                <TextBlock
+                                                    Margin="0,0,10,0"
+                                                    HorizontalAlignment="Center"
+                                                    Style="{ThemeResource BaseTextBlockStyle}"
+                                                    Text="Check Clipboard" />
+                                                <win:TextBlock
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="14"
+                                                    FontWeight="Medium"
+                                                    Foreground="Silver"
+                                                    Text="Win+V" />
+                                            </StackPanel>
+                                        </Flyout>
+                                    </Button.Flyout>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+
+                </Grid>
+
+            </ScrollViewer>
+
+        </Grid>
+    </Grid>
+
+</Page>

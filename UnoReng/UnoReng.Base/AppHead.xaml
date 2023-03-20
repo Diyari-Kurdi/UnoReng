@@ -1,0 +1,21 @@
+﻿<local:App
+    x:Class="UnoReng.AppHead"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UnoReng">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+
+                <ResourceDictionary Source="ms-appx:///UnoReng/AppResources.xaml" />
+
+                <!--  Include additional resource dictionaries here, or in UnoReng/AppResources.xaml  -->
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--  Include additional resources here, or in UnoReng/AppResources.xaml  -->
+        </ResourceDictionary>
+    </Application.Resources>
+
+</local:App>
